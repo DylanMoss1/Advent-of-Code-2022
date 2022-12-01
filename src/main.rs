@@ -30,9 +30,10 @@ fn main() {
         let func = get_day_solver(day);
 
         let input_data = fs::read_to_string("input/input_data.txt").expect("Failed to read file /input/input_data.txt");
+        let input_star_data = fs::read_to_string("input/input_star_data.txt").expect("Failed to read file /input/input_star_data.txt");
 
         let time = Instant::now();
-        let (p1, p2) = func(input_data);
+        let (p1, p2) = func(input_data, input_star_data);
         let elapsed_ms = time.elapsed().as_nanos() as f64 / 1_000_000.0;
 
         println!("\n=== Day {:02} ===", day);
@@ -46,7 +47,7 @@ fn main() {
     println!("Total runtime: {:.4} ms", runtime);
 }
 
-fn get_day_solver(day: u8) -> fn(String) -> SolutionPair {
+fn get_day_solver(day: u8) -> fn(String, String) -> SolutionPair {
     match day {
         1 => day01::solve,
         2 => day02::solve,
